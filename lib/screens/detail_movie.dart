@@ -56,7 +56,9 @@ class DetailMovie extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: CachedNetworkImage(
-                    imageUrl: '$imageUrl${movie.poster_path}',
+                    imageUrl: movie.poster_path != null
+                        ? '$imageUrl${movie.poster_path}'
+                        : '$imageBlueUrl',
                     height: _size.height * 0.42,
                     width: _size.width * 0.47,
                     fit: BoxFit.cover,
