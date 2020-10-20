@@ -1,17 +1,20 @@
+import 'dart:ffi';
+
+import 'package:demo/models/genre.dart';
 import 'package:flutter/material.dart';
 
 class Movie {
   int id;
-  int vote_count;
-  var vote_average;
+  int voteCount;
+  double voteAverage;
   String title;
-  String release_date;
-  String original_language;
-  String original_title;
-  List<dynamic> genre_ids;
-  String backdrop_path;
+  String releaseDate;
+  String originalLanguage;
+  String originalTitle;
+  List<Genre> genreIds;
+  String backdropPath;
   String overview;
-  String poster_path;
+  String posterPath;
   double popularity;
   bool video;
   bool adult;
@@ -19,19 +22,23 @@ class Movie {
   // Named Constructor
   Movie.fromJson(Map<String, dynamic> parsedJson) {
     id = parsedJson['id'];
-    vote_count = parsedJson['vote_count'];
-    vote_average = parsedJson['vote_average'];
+    voteCount = parsedJson['vote_count'];
+    voteAverage = voteAverageTM(parsedJson['vote_average']);
     title = parsedJson['title'];
-    release_date = parsedJson['release_date'];
-    original_language = parsedJson['original_language'];
-    original_title = parsedJson['original_title'];
-    genre_ids = parsedJson['genre_ids'];
-    backdrop_path = parsedJson['backdrop_path'];
+    releaseDate = parsedJson['release_date'];
+    originalLanguage = parsedJson['original_language'];
+    originalTitle = parsedJson['original_title'];
+    genreIds = genresTM(parsedJson['genre_ids']);
+    backdropPath = parsedJson['backdrop_path'];
     overview = parsedJson['overview'];
-    poster_path = parsedJson['poster_path'];
+    posterPath = parsedJson['poster_path'];
     popularity = parsedJson['popularity'];
     video = parsedJson['video'];
     adult = parsedJson['adult'];
+  }
+
+  double voteAverageTM(dynamic voteAverage) {
+    return voteAverage + .0;
   }
 }
 

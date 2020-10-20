@@ -27,7 +27,7 @@ class Search extends StatelessWidget {
           color: Colors.white,
         ),
         onChanged: (String query) {
-          if (query != "") {
+          if (query.isNotEmpty) {
             context
                 .read<MovieViewModel>()
                 .fetchFutureSarch(MovieApi().fetchSearchMovie(query));
@@ -110,8 +110,8 @@ class Search extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
         child: CachedNetworkImage(
-          imageUrl: snapshot[index].poster_path != null
-              ? '$imageUrl${snapshot[index].poster_path}'
+          imageUrl: snapshot[index].posterPath != null
+              ? '$imageUrl${snapshot[index].posterPath}'
               : '$imageBlueUrl',
           fit: BoxFit.fill,
         ),
@@ -131,8 +131,9 @@ class Search extends StatelessWidget {
           Row(
             children: <Widget>[
               Container(
+                width: 200,
                 child: Text(
-                  '${snapshot[index].title.length < 15 ? snapshot[index].title : snapshot[index].title.substring(0, 15) + '..'}',
+                  snapshot[index].title,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -142,7 +143,7 @@ class Search extends StatelessWidget {
               ),
               Container(
                 child: Text(
-                  ' (${snapshot[index].release_date.toString().substring(0, 4)})',
+                  ' (${snapshot[index].releaseDate.toString().substring(0, 4)})',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -167,7 +168,7 @@ class Search extends StatelessWidget {
               ),
               Container(
                 child: Text(
-                  '${snapshot[index].vote_average}',
+                  '${snapshot[index].voteAverage}',
                   style: TextStyle(
                     color: Colors.white,
                   ),

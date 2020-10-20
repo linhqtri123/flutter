@@ -1,23 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demo/models/movie_model.dart';
+import 'package:demo/movie_type.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../constants.dart';
 
-Widget listMovie(BuildContext context, String title) {
+Widget listMovie(BuildContext context, MovieType type) {
   List<Movie> movies;
-  switch (title) {
-    case 'Now Playing':
+  switch (type) {
+    case MovieType.NowPlaying:
       movies = context.watch<MovieViewModel>().getNowPlayingList();
       break;
-    case 'Popular':
-      movies = context.watch<MovieViewModel>().getPopularList();
-      break;
-    case 'Up Coming':
+    case MovieType.Upcoming:
       movies = context.watch<MovieViewModel>().getUpcomingList();
       break;
-    default:
+    case MovieType.TopRated:
       movies = context.watch<MovieViewModel>().getTopRatedList();
+      break;
+    case MovieType.Popular:
+      movies = context.watch<MovieViewModel>().getPopularList();
       break;
   }
   return Container(
@@ -44,7 +45,7 @@ Widget listMovie(BuildContext context, String title) {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5.0),
                     child: CachedNetworkImage(
-                      imageUrl: '$imageUrl${movies[index].poster_path}',
+                      imageUrl: '$imageUrl${movies[index].posterPath}',
                       placeholder: (context, url) {
                         return Container(
                           height: 200.0,
@@ -89,7 +90,7 @@ Widget listMovie(BuildContext context, String title) {
                       width: 5.0,
                     ),
                     Text(
-                      '${movies[index].vote_average}',
+                      '${movies[index].voteAverage}',
                       style: TextStyle(
                         color: mLightGrey,
                         fontSize: 13.0,

@@ -10,9 +10,9 @@ class Login {
 class LoginViewModel with ChangeNotifier {
   bool userNameFlag = false;
   bool passwordFlag = false;
-  void isInputUserName(String value) => userNameFlag = (value != "");
+  void checkEmptyUserName(String value) => userNameFlag = value.isNotEmpty;
 
-  void isInputPassword(String value) => passwordFlag = (value != "");
+  void checkEmptyPassword(String value) => passwordFlag = value.isNotEmpty;
 
   bool isButtonEnabled() => (userNameFlag && passwordFlag);
 }

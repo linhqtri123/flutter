@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
     _login() async {
       if (userName == "admin" && password == "admin") {
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setBool("flag", true);
+        await prefs.setBool("hasLogin", true);
         Navigator.pushReplacementNamed(context, "/home");
       } else {
         _showMyDialog(context);
@@ -88,14 +88,24 @@ class LoginScreen extends StatelessWidget {
                           1.4,
                           Container(
                             decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Color.fromRGBO(225, 95, 27, .3),
-                                      blurRadius: 20,
-                                      offset: Offset(0, 10))
-                                ]),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color.fromRGBO(
+                                    225,
+                                    95,
+                                    27,
+                                    .3,
+                                  ),
+                                  blurRadius: 20,
+                                  offset: Offset(
+                                    0,
+                                    10,
+                                  ),
+                                ),
+                              ],
+                            ),
                             child: Column(
                               children: <Widget>[
                                 Container(
@@ -115,7 +125,7 @@ class LoginScreen extends StatelessWidget {
                                     onChanged: (value) {
                                       context
                                           .read<LoginViewModel>()
-                                          .isInputUserName(value);
+                                          .checkEmptyUserName(value);
                                       userName = value;
                                     },
                                   ),
@@ -138,7 +148,7 @@ class LoginScreen extends StatelessWidget {
                                     onChanged: (value) {
                                       context
                                           .read<LoginViewModel>()
-                                          .isInputPassword(value);
+                                          .checkEmptyPassword(value);
                                       password = value;
                                     },
                                   ),
@@ -209,7 +219,7 @@ class LoginScreen extends StatelessWidget {
           content: Text('Username or Password is invalid !!!'),
           actions: <Widget>[
             FlatButton(
-              child: Text('Xác nhận'),
+              child: Text('Confirm'),
               onPressed: () {
                 Navigator.of(context).pop();
               },

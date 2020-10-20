@@ -1,4 +1,5 @@
 import 'package:demo/models/movie_model.dart';
+import 'package:demo/movie_type.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../resources/movies_api.dart';
@@ -16,14 +17,15 @@ class _MovieHomePageState extends State<MovieHomePage> {
   Future<List<Movie>> futurePopularMovie;
   Future<List<Movie>> futureUpcomingMovie;
   Future<List<Movie>> futureTopRatedMovie;
+  final movieApi = MovieApi();
 
   @override
   void initState() {
     super.initState();
-    futureNowPlayingMovie = MovieApi().fetchNowPlayingMovies();
-    futurePopularMovie = MovieApi().fetchPopularMovies();
-    futureUpcomingMovie = MovieApi().fetchUpcomingMovies();
-    futureTopRatedMovie = MovieApi().fetchTopRatedMoives();
+    futureNowPlayingMovie = movieApi.fetchNowPlayingMovies();
+    futurePopularMovie = movieApi.fetchPopularMovies();
+    futureUpcomingMovie = movieApi.fetchUpcomingMovies();
+    futureTopRatedMovie = movieApi.fetchTopRatedMoives();
   }
 
   @override
@@ -101,7 +103,11 @@ class _MovieHomePageState extends State<MovieHomePage> {
     @required String title,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15.0, right: 10.0, top: 15.0),
+      padding: const EdgeInsets.only(
+        left: 15.0,
+        right: 10.0,
+        top: 15.0,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -136,7 +142,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
       builder: (context, snapShot) {
         if (snapShot.connectionState == ConnectionState.done) {
           context.watch<MovieViewModel>().fetchNowPlayingMovies(snapShot.data);
-          return listMovie(context, 'Now Playing');
+          return listMovie(context, MovieType.NowPlaying);
         } else {
           return Center(
             child: CircularProgressIndicator(),
@@ -152,7 +158,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
       builder: (context, snapShot) {
         if (snapShot.connectionState == ConnectionState.done) {
           context.watch<MovieViewModel>().fetchPopularMovies(snapShot.data);
-          return listMovie(context, 'Popular');
+          return listMovie(context, MovieType.Popular);
         } else {
           return Center(
             child: CircularProgressIndicator(),
@@ -168,7 +174,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
       builder: (context, snapShot) {
         if (snapShot.connectionState == ConnectionState.done) {
           context.watch<MovieViewModel>().fetchUpcomingMovies(snapShot.data);
-          return listMovie(context, 'Up Coming');
+          return listMovie(context, MovieType.Upcoming);
         } else {
           return Center(
             child: CircularProgressIndicator(),
@@ -184,7 +190,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
       builder: (context, snapShot) {
         if (snapShot.connectionState == ConnectionState.done) {
           context.watch<MovieViewModel>().fetchtopRatedMovies(snapShot.data);
-          return listMovie(context, 'Top Rated');
+          return listMovie(context, MovieType.TopRated);
         } else {
           return Center(
             child: CircularProgressIndicator(),

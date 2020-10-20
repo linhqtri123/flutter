@@ -56,8 +56,8 @@ class DetailMovie extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15.0),
                   child: CachedNetworkImage(
-                    imageUrl: movie.poster_path != null
-                        ? '$imageUrl${movie.poster_path}'
+                    imageUrl: movie.posterPath != null
+                        ? '$imageUrl${movie.posterPath}'
                         : '$imageBlueUrl',
                     height: _size.height * 0.42,
                     width: _size.width * 0.47,
@@ -69,7 +69,7 @@ class DetailMovie extends StatelessWidget {
                 top: _size.height * 0.005,
                 right: _size.width * 0.03,
                 child: Container(
-                  height: _size.height * 0.05,
+                  height: _size.height * 0.04,
                   width: _size.width * 0.07,
                   decoration: BoxDecoration(
                     color: Colors.red,
@@ -83,7 +83,7 @@ class DetailMovie extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      movie.vote_average.toString(),
+                      movie.voteAverage.toString(),
                       style: TextStyle(
                           fontFamily: 'Raleway',
                           fontSize: 14.0,
@@ -127,7 +127,7 @@ class DetailMovie extends StatelessWidget {
         child: Wrap(
           alignment: WrapAlignment.center,
           children: <Widget>[
-            for (var genre in genresTM(movie.genre_ids))
+            for (Genre genre in movie.genreIds)
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 2.0),
                 child: Chip(
@@ -155,25 +155,25 @@ class DetailMovie extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            movie.release_date[0],
+            movie.releaseDate[0],
             style: TextStyle(
               color: mLightGrey,
             ),
           ),
           Text(
-            movie.release_date[1],
+            movie.releaseDate[1],
             style: TextStyle(
               color: mLightGrey,
             ),
           ),
           Text(
-            movie.release_date[2],
+            movie.releaseDate[2],
             style: TextStyle(
               color: mLightGrey,
             ),
           ),
           Text(
-            movie.release_date[3],
+            movie.releaseDate[3],
             style: TextStyle(
               color: mLightGrey,
             ),
@@ -191,7 +191,7 @@ class DetailMovie extends StatelessWidget {
           ),
           SizedBox(width: 5.0),
           Text(
-            movie.original_language.toUpperCase(),
+            movie.originalLanguage.toUpperCase(),
             style: TextStyle(
               color: mLightGrey,
             ),
