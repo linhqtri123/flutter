@@ -8,16 +8,16 @@ import '../constants.dart';
 Widget listMovie(BuildContext context, MovieType type) {
   List<Movie> movies;
   switch (type) {
-    case MovieType.NowPlaying:
+    case MovieType.nowPlaying:
       movies = context.watch<MovieViewModel>().getNowPlayingList();
       break;
-    case MovieType.Upcoming:
+    case MovieType.upcoming:
       movies = context.watch<MovieViewModel>().getUpcomingList();
       break;
-    case MovieType.TopRated:
+    case MovieType.topRated:
       movies = context.watch<MovieViewModel>().getTopRatedList();
       break;
-    case MovieType.Popular:
+    case MovieType.popular:
       movies = context.watch<MovieViewModel>().getPopularList();
       break;
   }
@@ -27,7 +27,7 @@ Widget listMovie(BuildContext context, MovieType type) {
     child: ListView.builder(
       physics: BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
-      itemBuilder: (BuildContext context, int index) {
+      itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
             Navigator.pushNamed(context, '/detail', arguments: movies[index]);

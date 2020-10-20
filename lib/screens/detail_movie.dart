@@ -10,7 +10,7 @@ class DetailMovie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context).settings.arguments;
-    final Size _size = MediaQuery.of(context).size;
+    final _size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: mPrimaryColor,
       appBar: _appBar(context),

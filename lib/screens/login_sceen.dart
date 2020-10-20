@@ -1,9 +1,10 @@
 import 'package:demo/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../animation/fade_animation.dart';
 import '../constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeLogin = '/login';
@@ -13,12 +14,12 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     _login() async {
-      if (userName == "admin" && password == "admin") {
+      if (userName == 'admin' && password == 'admin') {
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setBool("hasLogin", true);
-        Navigator.pushReplacementNamed(context, "/home");
+        await prefs.setBool('hasLogin', true);
+        await Navigator.pushReplacementNamed(context, '/home');
       } else {
-        _showMyDialog(context);
+        await _showMyDialog(context);
       }
     }
 
@@ -71,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                             FadeAnimation(
                               1,
                               Text(
-                                "Login",
+                                'Login',
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 40,
@@ -118,7 +119,7 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   child: TextField(
                                     decoration: InputDecoration(
-                                      hintText: "Username",
+                                      hintText: 'Username',
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
                                     ),
@@ -141,7 +142,7 @@ class LoginScreen extends StatelessWidget {
                                   child: TextField(
                                     obscureText: true,
                                     decoration: InputDecoration(
-                                      hintText: "Password",
+                                      hintText: 'Password',
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none,
                                     ),
@@ -163,7 +164,7 @@ class LoginScreen extends StatelessWidget {
                         FadeAnimation(
                             1.5,
                             Text(
-                              "Forgot Password?",
+                              'Forgot Password?',
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
@@ -185,7 +186,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               disabledColor: Colors.blueGrey[200],
                               child: Text(
-                                "Login",
+                                'Login',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -210,7 +211,7 @@ class LoginScreen extends StatelessWidget {
     return showDialog<void>(
       context: context,
       barrierDismissible: true,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           title: Text(
             'Alert',
@@ -219,10 +220,10 @@ class LoginScreen extends StatelessWidget {
           content: Text('Username or Password is invalid !!!'),
           actions: <Widget>[
             FlatButton(
-              child: Text('Confirm'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
+              child: Text('Confirm'),
             ),
           ],
         );

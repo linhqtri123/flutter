@@ -1,11 +1,11 @@
 import 'dart:ui';
 
-const mPrimaryColor = const Color(0xff05070c);
-const mAccentColor = const Color(0xff4B97C5);
-const mBlue = const Color(0xff0984e3);
-const mDarkBlue1 = const Color(0xff314665);
-const mDarkBlue2 = const Color(0xff253250);
-const mLightGrey = const Color(0xffb5b6bf);
+const mPrimaryColor = Color(0xff05070c);
+const mAccentColor = Color(0xff4B97C5);
+const mBlue = Color(0xff0984e3);
+const mDarkBlue1 = Color(0xff314665);
+const mDarkBlue2 = Color(0xff253250);
+const mLightGrey = Color(0xffb5b6bf);
 
 const apiKey = 'e0006e65d0ed3abc9b55fb77dece9d2e';
 

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:demo/models/genre.dart';
 import 'package:flutter/material.dart';
 

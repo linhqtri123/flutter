@@ -1,10 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:demo/models/movie_model.dart';
 import 'package:demo/resources/movies_api.dart';
 import 'package:demo/widgets/search_place_holder.dart';
 import 'package:flutter/material.dart';
-import '../constants.dart';
 import 'package:provider/provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+
+import '../constants.dart';
 
 class Search extends StatelessWidget {
   static const routeSearch = '/search';
@@ -26,7 +27,7 @@ class Search extends StatelessWidget {
         style: TextStyle(
           color: Colors.white,
         ),
-        onChanged: (String query) {
+        onChanged: (query) {
           if (query.isNotEmpty) {
             context
                 .read<MovieViewModel>()
@@ -58,20 +59,20 @@ class Search extends StatelessWidget {
     );
   }
 
-  buildSearchResults(BuildContext context) {
+  Consumer<MovieViewModel> buildSearchResults(BuildContext context) {
     return Consumer<MovieViewModel>(
       builder: (context, value, child) {
         return Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: FutureBuilder<List<Movie>>(
             future: value.getFutureSearch(),
-            builder: (BuildContext context, snapshot) {
+            builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return searchPlaceholder();
               }
               return ListView.builder(
                 itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
                       openDetailsScreen(context, snapshot.data[index]);
@@ -141,16 +142,14 @@ class Search extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              Container(
-                child: Text(
-                  ' (${snapshot[index].releaseDate.toString().substring(0, 4)})',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                  ),
-                  textAlign: TextAlign.left,
-                  overflow: TextOverflow.ellipsis,
+              Text(
+                ' (${snapshot[index].releaseDate.toString().substring(0, 4)})',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
                 ),
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
@@ -166,12 +165,10 @@ class Search extends StatelessWidget {
               SizedBox(
                 width: 5.0,
               ),
-              Container(
-                child: Text(
-                  '${snapshot[index].voteAverage}',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+              Text(
+                '${snapshot[index].voteAverage}',
+                style: TextStyle(
+                  color: Colors.white,
                 ),
               ),
             ],
@@ -181,11 +178,11 @@ class Search extends StatelessWidget {
     );
   }
 
-  openDetailsScreen(BuildContext context, Movie movie) {
+  void openDetailsScreen(BuildContext context, Movie movie) {
     Navigator.pushNamed(context, '/detail', arguments: movie);
   }
 
-  clearSearch(BuildContext context) {
+  void clearSearch(BuildContext context) {
     searchController.clear();
     Navigator.pop(context);
   }

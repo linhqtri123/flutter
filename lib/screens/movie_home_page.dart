@@ -1,9 +1,10 @@
 import 'package:demo/models/movie_model.dart';
 import 'package:demo/movie_type.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../constants.dart';
 import '../resources/movies_api.dart';
-import 'package:provider/provider.dart';
 import '../widgets/list_movie.dart';
 
 class MovieHomePage extends StatefulWidget {
@@ -112,7 +113,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            '$title',
+            title,
             style: TextStyle(
               color: mLightGrey,
               fontSize: 25.0,
@@ -142,7 +143,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
       builder: (context, snapShot) {
         if (snapShot.connectionState == ConnectionState.done) {
           context.watch<MovieViewModel>().fetchNowPlayingMovies(snapShot.data);
-          return listMovie(context, MovieType.NowPlaying);
+          return listMovie(context, MovieType.nowPlaying);
         } else {
           return Center(
             child: CircularProgressIndicator(),
@@ -158,7 +159,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
       builder: (context, snapShot) {
         if (snapShot.connectionState == ConnectionState.done) {
           context.watch<MovieViewModel>().fetchPopularMovies(snapShot.data);
-          return listMovie(context, MovieType.Popular);
+          return listMovie(context, MovieType.popular);
         } else {
           return Center(
             child: CircularProgressIndicator(),
@@ -174,7 +175,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
       builder: (context, snapShot) {
         if (snapShot.connectionState == ConnectionState.done) {
           context.watch<MovieViewModel>().fetchUpcomingMovies(snapShot.data);
-          return listMovie(context, MovieType.Upcoming);
+          return listMovie(context, MovieType.upcoming);
         } else {
           return Center(
             child: CircularProgressIndicator(),
@@ -190,7 +191,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
       builder: (context, snapShot) {
         if (snapShot.connectionState == ConnectionState.done) {
           context.watch<MovieViewModel>().fetchtopRatedMovies(snapShot.data);
-          return listMovie(context, MovieType.TopRated);
+          return listMovie(context, MovieType.topRated);
         } else {
           return Center(
             child: CircularProgressIndicator(),

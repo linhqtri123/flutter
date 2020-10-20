@@ -16,8 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
     startTimer();
   }
 
-  startTimer() async {
-    var duration = Duration(seconds: 3);
+  Future<Timer> startTimer() async {
+    final duration = Duration(seconds: 3);
     return Timer(duration, _getSharedPreference);
   }
 
@@ -40,13 +40,11 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                child: Image.asset('images/logo.png'),
-              ),
+              Image.asset('images/logo.png'),
               Padding(
                 padding: EdgeInsets.only(top: 20.0),
                 child: Text(
-                  "Welcome to movie app",
+                  'Welcome to movie app',
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
@@ -70,11 +68,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _getSharedPreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool flag = prefs.getBool("flag");
+    bool flag;
+    flag = prefs.getBool('flag');
     if (flag != null) {
-      Navigator.pushReplacementNamed(context, "/home");
+      await Navigator.pushReplacementNamed(context, '/home');
     } else {
-      Navigator.pushReplacementNamed(context, "/login");
+      await Navigator.pushReplacementNamed(context, '/login');
     }
   }
 }
