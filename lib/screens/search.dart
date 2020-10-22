@@ -113,7 +113,7 @@ class Search extends StatelessWidget {
         child: CachedNetworkImage(
           imageUrl: snapshot[index].posterPath != null
               ? '$imageUrl${snapshot[index].posterPath}'
-              : '$imageBlueUrl',
+              : imageBlueUrl,
           fit: BoxFit.fill,
         ),
       ),
@@ -132,7 +132,7 @@ class Search extends StatelessWidget {
           Row(
             children: <Widget>[
               Container(
-                width: 200,
+                width: 160,
                 child: Text(
                   snapshot[index].title,
                   style: TextStyle(

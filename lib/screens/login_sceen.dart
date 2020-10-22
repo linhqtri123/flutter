@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
     _login() async {
       if (userName == 'admin' && password == 'admin') {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final prefs = await SharedPreferences.getInstance();
         await prefs.setBool('hasLogin', true);
         await Navigator.pushReplacementNamed(context, '/home');
       } else {

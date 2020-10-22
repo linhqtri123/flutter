@@ -58,7 +58,7 @@ class DetailMovie extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: movie.posterPath != null
                         ? '$imageUrl${movie.posterPath}'
-                        : '$imageBlueUrl',
+                        : imageBlueUrl,
                     height: _size.height * 0.42,
                     width: _size.width * 0.47,
                     fit: BoxFit.cover,
@@ -69,8 +69,8 @@ class DetailMovie extends StatelessWidget {
                 top: _size.height * 0.005,
                 right: _size.width * 0.03,
                 child: Container(
-                  height: _size.height * 0.04,
-                  width: _size.width * 0.07,
+                  height: _size.height * 0.05,
+                  width: _size.width * 0.09,
                   decoration: BoxDecoration(
                     color: Colors.red,
                     border: Border.all(

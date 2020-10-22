@@ -67,10 +67,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _getSharedPreference() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool flag;
-    flag = prefs.getBool('flag');
-    if (flag != null) {
+    final prefs = await SharedPreferences.getInstance();
+    bool hasLogin;
+    hasLogin = prefs.getBool('hasLogin');
+    if (hasLogin != null) {
       await Navigator.pushReplacementNamed(context, '/home');
     } else {
       await Navigator.pushReplacementNamed(context, '/login');

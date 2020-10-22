@@ -1,5 +1,6 @@
 import 'package:demo/models/movie_model.dart';
 import 'package:demo/movie_type.dart';
+import 'package:demo/resources/custom_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -141,14 +142,20 @@ class _MovieHomePageState extends State<MovieHomePage> {
     return FutureBuilder<List<Movie>>(
       future: futureNowPlayingMovie,
       builder: (context, snapShot) {
-        if (snapShot.connectionState == ConnectionState.done) {
+        if (snapShot.hasData) {
           context.watch<MovieViewModel>().fetchNowPlayingMovies(snapShot.data);
           return listMovie(context, MovieType.nowPlaying);
-        } else {
+        } else if (snapShot.hasError) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: Text(
+              (snapShot.error as CustomException).convertToString(),
+              style: TextStyle(color: mLightGrey, fontSize: 12),
+            ),
           );
         }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }
@@ -157,14 +164,20 @@ class _MovieHomePageState extends State<MovieHomePage> {
     return FutureBuilder<List<Movie>>(
       future: futurePopularMovie,
       builder: (context, snapShot) {
-        if (snapShot.connectionState == ConnectionState.done) {
+        if (snapShot.hasData) {
           context.watch<MovieViewModel>().fetchPopularMovies(snapShot.data);
           return listMovie(context, MovieType.popular);
-        } else {
+        } else if (snapShot.hasError) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: Text(
+              (snapShot.error as CustomException).convertToString(),
+              style: TextStyle(color: mLightGrey, fontSize: 12),
+            ),
           );
         }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }
@@ -173,14 +186,20 @@ class _MovieHomePageState extends State<MovieHomePage> {
     return FutureBuilder<List<Movie>>(
       future: futureUpcomingMovie,
       builder: (context, snapShot) {
-        if (snapShot.connectionState == ConnectionState.done) {
+        if (snapShot.hasData) {
           context.watch<MovieViewModel>().fetchUpcomingMovies(snapShot.data);
           return listMovie(context, MovieType.upcoming);
-        } else {
+        } else if (snapShot.hasError) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: Text(
+              (snapShot.error as CustomException).convertToString(),
+              style: TextStyle(color: mLightGrey, fontSize: 12),
+            ),
           );
         }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }
@@ -189,14 +208,20 @@ class _MovieHomePageState extends State<MovieHomePage> {
     return FutureBuilder<List<Movie>>(
       future: futureTopRatedMovie,
       builder: (context, snapShot) {
-        if (snapShot.connectionState == ConnectionState.done) {
+        if (snapShot.hasData) {
           context.watch<MovieViewModel>().fetchtopRatedMovies(snapShot.data);
           return listMovie(context, MovieType.topRated);
-        } else {
+        } else if (snapShot.hasError) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: Text(
+              (snapShot.error as CustomException).convertToString(),
+              style: TextStyle(color: mLightGrey, fontSize: 12),
+            ),
           );
         }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
       },
     );
   }

@@ -9,8 +9,7 @@ const mLightGrey = Color(0xffb5b6bf);
 
 const apiKey = 'e0006e65d0ed3abc9b55fb77dece9d2e';
 
-const nowPlayingApi =
-    'https://api.themoviedb.org/3/movie/now_playing?api_key=$apiKey';
+const nowPlayingApi = 'https://api.themoviedb.org/3/movie/now_playing?api_key=';
 
 const popularApi = 'https://api.themoviedb.org/3/movie/popular?api_key=$apiKey';
 
